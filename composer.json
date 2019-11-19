@@ -1,0 +1,19 @@
+{
+    "name": "romulo.vieira/hackthon-4-periodo",
+    "description": "\"Projeto de Desenvolvimento 4\u0000 Periodo \"",
+    "authors": [
+        {
+            "name": "Romulo Vieira",
+            "email": "romuloevil@outlook.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Hackthon\\" : "src/Hackthon"
+        }
+    },
+    "require": {
+        "symfony/var-dumper": "^4.3",
+        "league/climate": "^3.5"
+    }
+}
