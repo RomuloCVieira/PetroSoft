@@ -10,6 +10,7 @@ return array(
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Component\\VarDumper\\' => array($vendorDir . '/symfony/var-dumper'),
     'Seld\\CliPrompt\\' => array($vendorDir . '/seld/cli-prompt/src'),
+    'Respect\\Validation\\' => array($vendorDir . '/respect/validation/library'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'League\\CLImate\\' => array($vendorDir . '/league/climate/src'),
     'Hackthon\\' => array($baseDir . '/src/Hackthon'),

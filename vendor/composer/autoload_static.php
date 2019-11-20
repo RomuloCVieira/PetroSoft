@@ -20,6 +20,10 @@ class ComposerStaticInitd6c934989acb8a7810d3c5381744f7c4
             'Symfony\\Component\\VarDumper\\' => 28,
             'Seld\\CliPrompt\\' => 15,
         ),
+        'R' => 
+        array (
+            'Respect\\Validation\\' => 19,
+        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
@@ -50,6 +54,10 @@ class ComposerStaticInitd6c934989acb8a7810d3c5381744f7c4
         'Seld\\CliPrompt\\' => 
         array (
             0 => __DIR__ . '/..' . '/seld/cli-prompt/src',
+        ),
+        'Respect\\Validation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/respect/validation/library',
         ),
         'Psr\\Log\\' => 
         array (
