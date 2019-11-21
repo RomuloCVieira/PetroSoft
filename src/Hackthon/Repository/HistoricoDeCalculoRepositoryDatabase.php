@@ -29,12 +29,26 @@ class HistoricoDeCalculoRepositoryDatabase implements HistoricoDeCalculoReposito
         $stmt->execute();
         return $stmt->fetch();
     }
-    public function update(\Hackthon\Entity\HistoricoDeCalculo $historicoDeCalculo): \Hackthon\Entity\HistoricoDeCalculo
+    public function updatePrecoEtanolDatabase(\Hackthon\Entity\HistoricoDeCalculo $historicoDeCalculo,string $coluna): \Hackthon\Entity\HistoricoDeCalculo
     {
-        $stmt = $this->conexao->prepare("update historico_de_calculo set preco_etanol = ? where id = ?");
+        $stmt = $this->conexao->prepare("UPDATE historico_de_calculo SET $coluna = ? WHERE id = ?");
         $stmt->bindValue(1, $historicoDeCalculo->getPrecoEtanol());
         $stmt->bindValue(2, $historicoDeCalculo->getId());
         $stmt->execute();        
+        return $historicoDeCalculo;
+    }
+    public function insertResultadoDatabase(HistoricoDeCalculo $historicoDeCalculo) : HistoricoDeCalculo
+    {
+        $stmt = $this->conexao->prepare("INSERT INTO historico_de_calculo (resultado,pontuacao,preco_gasolina,preco_etanol,data,idcliente) 
+                                         VALUES (:resultado,:pontuacao,:preco_gasolina,:preco_etanol,:data,:idcliente)");
+        $stmt->bindValue(':resultado',$historicoDeCalculo->getResultado());
+        $stmt->bindValue(':pontuacao',$historicoDeCalculo->getPontuacao());
+        $stmt->bindValue(':preco_gasolina',$historicoDeCalculo->getPrecoGasolina());
+        $stmt->bindValue(':preco_etanol',$historicoDeCalculo->getPrecoEtanol());
+        $stmt->bindValue(':data',$historicoDeCalculo->getData());
+        $stmt->bindValue(':idcliente',$historicoDeCalculo->getIdCliente());
+        $stmt->execute();
+
         return $historicoDeCalculo;
     }
 

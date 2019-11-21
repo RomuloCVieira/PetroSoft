@@ -18,6 +18,7 @@ abstract class AtualizaPreco extends ControllerHistoricoDeCalculo
         // O brmétodo faz exatamente isso, insere uma quebra de linha:
         $this->climate->bleak();
         // return $this->serviceCliente->getNome();
+        $this->coluna = $this->getColuna();
         $preco = $this->getPreco();
         // return um Cliente Entity
         $preco = $this->setPreco($preco);
@@ -56,6 +57,6 @@ abstract class AtualizaPreco extends ControllerHistoricoDeCalculo
     }
     protected function updatePreco(HistoricoDeCalculo $historicoDeCalculo) : void
     {
-        $this->serviceHistoricoDeCalculo->update($historicoDeCalculo);
+        $this->serviceHistoricoDeCalculo->updatePrecoEtanolSevice($historicoDeCalculo,$this->coluna);
     }
 }

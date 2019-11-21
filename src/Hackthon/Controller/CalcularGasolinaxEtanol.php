@@ -6,7 +6,7 @@ namespace Hackthon\Controller;
 
 use Hackthon\Entity\HistoricoDeCalculo;
 
-class AtualizaPrecoEtanol extends AtualizaPreco
+class AtualizaPrecoGasolina extends AtualizaPreco
 {
 
     protected function getPreco() : HistoricoDeCalculo
@@ -16,12 +16,12 @@ class AtualizaPrecoEtanol extends AtualizaPreco
 
     protected function getTitle() : string
     {
-        return 'Atualizar Preço do etanol';
+        return 'Calcular';
     }
     
     protected function getSuccessMessage() : string
     {
-        return 'Preço atualizado com sucesso!!!';
+        return 'Calculo efetuado com sucesso';
     }
     protected function getColuna() : string
     {

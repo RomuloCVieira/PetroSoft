@@ -9,9 +9,9 @@ class HistoricoDeCalculo
     private $id;
     private $resultado;
     private $pontuacao;
-    private $idCliente;
-    private $precoGasolina;
-    private $precoEtanol;
+    private $idcliente;
+    private $preco_gasolina;
+    private $preco_etanol;
     private $data;
 
     public function setId(int $id) : HistoricoDeCalculo
@@ -34,14 +34,14 @@ class HistoricoDeCalculo
         $this->idCliente = $idCliente;
         return $this;
     }
-    public function setPrecoGasolina(float $precoGasolina) : HistoricoDeCalculo
+    public function setPrecoGasolina(float $preco_gasolina) : HistoricoDeCalculo
     {
-        $this->precoGasolina = $precoGasolina;
+        $this->preco_gasolina = $preco_gasolina;
         return $this;
     }
     public function setPrecoEtanol(float $precoEtanol) : HistoricoDeCalculo
     {
-        $this->precoEtanol = $precoEtanol;
+        $this->preco_etanol = $precoEtanol;
         return $this;
     }
     public function setData(date $data) : HistoricoDeCalculo
@@ -67,11 +67,11 @@ class HistoricoDeCalculo
     }
     public function getPrecoGasolina() : float
     {
-        return $this->precoGasolina;
+        return (float) $this->preco_gasolina;
     }
     public function getPrecoEtanol() : float
     {
-        return $this->precoEtanol;
+        return (float) $this->preco_etanol;
     }
     public function getData() : date
     {

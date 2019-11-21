@@ -5,22 +5,20 @@ declare(strict_types=1);
 namespace Hackthon\Controller;
 
 use Hackthon\Service\HistoricoDeCalculo;
-
-class ListarHistoricoDeCalculo
+use Hackthon\Controller\Calcular;
+use Respect\Validation\Validator as v;
+ 
+class CalcularController
 {
     private $serviceHistoricoDeCalculo;
     private $climate;
+    private $calcular;
 
     public function __construct(HistoricoDeCalculo $serviceHistoricoDeCalculo,$climate,string $coluna)
     {
         $this->serviceHistoricoDeCalculo = $serviceHistoricoDeCalculo;
         $this->climate = $climate;
+        $this->calcular = new Calcular;
     }
-    // Parece ser semelhante a um construtor, mas, a diferença que é somente 
-    // uma invocação, portanto, o objeto precisa ser instanciado previamente.
-    //  É como se o objeto pudesse ser chamado inúmeras vezes como um método.
-    public function __invoke()
-    {
-        $this->climate->table($this->serviceHistoricoDeCalculo->getAll());
-    }
+
 }

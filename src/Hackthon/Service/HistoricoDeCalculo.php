@@ -20,12 +20,17 @@ class HistoricoDeCalculo
         return $this->historicoDeCalculoRepositoryInterface->getAll();
         // retornar o method getAll da interface
     }
-    public function getPrecoEtanol() : EntityHistoricoDeCalculo
+    public function getPrecoService() : EntityHistoricoDeCalculo
     {
         return $this->historicoDeCalculoRepositoryInterface->getById(1);
     }
-    public function update(EntityHistoricoDeCalculo $cliente) : EntityHistoricoDeCalculo
+    public function updatePrecoEtanolSevice(EntityHistoricoDeCalculo $historicoDeCalculo,string $coluna) : EntityHistoricoDeCalculo
     {
-        return $this->historicoDeCalculoRepositoryInterface->update($cliente);
+        return $this->historicoDeCalculoRepositoryInterface->updatePrecoEtanolDatabase($historicoDeCalculo,$coluna);
+    }
+    public function insertResultadoService(EntityHistoricoDeCalculo $historicoDeCalculo) 
+    {
+        return $this->historicoDeCalculoRepositoryInterface->insertResultadoDatabase($historicoDeCalculo);
+                                                             
     }
 }

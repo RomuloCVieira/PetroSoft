@@ -6,7 +6,7 @@ namespace Hackthon\Controller;
 
 use Hackthon\Service\HistoricoDeCalculo;
 
-class ListarHistoricoDeCalculo
+class ListarPrecoEtanolAtual
 {
     private $serviceHistoricoDeCalculo;
     private $climate;
@@ -21,6 +21,7 @@ class ListarHistoricoDeCalculo
     //  É como se o objeto pudesse ser chamado inúmeras vezes como um método.
     public function __invoke()
     {
-        $this->climate->table($this->serviceHistoricoDeCalculo->getAll());
+        $padding = $this->climate->padding(20);
+        $padding->label('Etanol')->result('R$ '. $this->serviceHistoricoDeCalculo->getPrecoService()->getPrecoEtanol());
     }
 }

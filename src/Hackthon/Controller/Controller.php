@@ -11,7 +11,7 @@ class Controller
     protected $serviceCliente;
     protected $climate;
 
-    public function __construct(Cliente $serviceCliente,$climate)
+    public function __construct(Cliente $serviceCliente,$climate,string $coluna)
     {
         $this->serviceCliente = $serviceCliente;
         $this->climate = $climate;

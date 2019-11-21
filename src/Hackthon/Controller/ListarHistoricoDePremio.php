@@ -11,7 +11,7 @@ class ListarHistoricoDePremio
     private $climate;
     private $servicehistoricoDePremio;
 
-    public function __construct(HistoricoDePremio $servicehistoricoDePremio,$climate)
+    public function __construct(HistoricoDePremio $servicehistoricoDePremio,$climate,string $coluna)
     {
         $this->servicehistoricoDePremio = $servicehistoricoDePremio;
         $this->climate = $climate;

@@ -10,11 +10,12 @@ class ControllerHistoricoDeCalculo
 {
     protected $serviceHistoricoDeCalculo;
     protected $climate;
-
-    public function __construct(HistoricoDeCalculo $serviceHistoricoDeCalculo,$climate)
+    protected $coluna;
+    public function __construct(HistoricoDeCalculo $serviceHistoricoDeCalculo,$climate,string $coluna)
     {
         $this->serviceHistoricoDeCalculo = $serviceHistoricoDeCalculo;
         $this->climate = $climate;
+        $this->coluna = $coluna;
         $this->climate->clear();
     }
 }

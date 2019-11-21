@@ -11,7 +11,7 @@ class ListarProdutoController
     private $serviceProduto;
     private $climate;
 
-    public function __construct(Produto $serviceProduto, $climate)
+    public function __construct(Produto $serviceProduto, $climate,string $coluna)
     {
         $this->serviceProduto = $serviceProduto;
         $this->climate = $climate;

@@ -2,5 +2,5 @@
     "host":"localhost",
     "database":"hackthon",
     "user":"root",
-    "pass":"1234"
+    "pass":""
 }
