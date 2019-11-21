@@ -9,6 +9,8 @@ use Hackthon\Controller\ListarClienteController;
 use Hackthon\Controller\ListarProdutoController;
 use Hackthon\Controller\ListarHistoricoDeCalculo;
 use Hackthon\Controller\ListarHistoricoDePremio;
+use Hackthon\Controller\AtualizaPrecoEtanol;
+use Hackthon\Controller\AtualizaNomeController;
 use Hackthon\Repository\ClienteRepositoryDatabase;
 use Hackthon\Repository\HistoricoDeCalculoRepositoryDatabase;
 use Hackthon\Repository\HistoricoDePremioRepositoryDatabase;
@@ -37,14 +39,17 @@ $controllers = [
     '2'   => ListarProdutoController::class,
     '3'   => ListarHistoricoDeCalculo::class,
     '4'   => ListarHistoricoDePremio::class,
+    '5'   => AtualizaNomeController::class,
+    '6'   => AtualizaPrecoEtanol::class,
 ];
 $service = [
     '1'   => $serviceCliente = new Cliente($clienteRepositoryDatabase),
     '2'   => $serviceProduto = new Produto($produtoRepositoryDatabase),
     '3'   => $serviceHistoricoDeCalculo = new HistoricoDeCalculo($historicoDeCalculoRepositoryDatabase),
     '4'   => $serviceHistoricoDePremio = new HistoricoDePremio($historicoDePremioRepositoryDatabase),
+    '5'   => $serviceCliente = new Cliente($clienteRepositoryDatabase),
+    '6'   => $serviceCliente = new HistoricoDeCalculo($historicoDeCalculoRepositoryDatabase),
 ];
-
 
 
 while(true){
@@ -53,15 +58,18 @@ while(true){
 
     $climate->comment('PetroSoft');
 
-    $padding = $climate->padding(10);
+    $padding = $climate->padding(20);
 
     $padding->label('Listar Clientes')->result('[1]');
     $padding->label('Listar Produtos')->result('[2]');
     $padding->label('Listar Historico de Calculos')->result('[3]');
     $padding->label('Listar Historico de Premios')->result('[4]');
+    $padding->label('Atualizar cliente')->result('[5]');
+    $padding->label('Atualizar Preço do Etanol')->result('[6]');
+
 
     $input = $climate->input('Selecione opção do menu');
-    $input->accept([1,2,3,4]);
+    $input->accept([1,2,3,4,5,6]);
 
     $nameController = $input->prompt();    
     //cria obejeto Controller Dependendo do que for passado por parametro e passa o climate para criar tabela

@@ -1,13 +1,13 @@
--- MariaDB dump 10.17  Distrib 10.4.8-MariaDB, for Win64 (AMD64)
+-- MySQL dump 10.13  Distrib 5.7.27, for Linux (x86_64)
 --
 -- Host: localhost    Database: hackthon
 -- ------------------------------------------------------
--- Server version	10.4.8-MariaDB
+-- Server version	5.7.27-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -35,7 +35,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES ('123.375.459-30','Kleber'),('123.375.479-30','Rômulo da cruz Vieira');
+INSERT INTO `cliente` VALUES ('123.375.459-30','Kleber'),('123.375.479-30','gazin');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,6 +50,9 @@ CREATE TABLE `historico_de_calculo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `resultado` float NOT NULL,
   `pontuacao` int(11) NOT NULL,
+  `preco_gasolina` float NOT NULL,
+  `preco_etanol` float NOT NULL,
+  `data` date NOT NULL DEFAULT '1970-01-01',
   `idcliente` varchar(15) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idcliente` (`idcliente`),
@@ -63,8 +66,37 @@ CREATE TABLE `historico_de_calculo` (
 
 LOCK TABLES `historico_de_calculo` WRITE;
 /*!40000 ALTER TABLE `historico_de_calculo` DISABLE KEYS */;
-INSERT INTO `historico_de_calculo` VALUES (1,8.6,1,'123.375.479-30'),(3,8.6,1,'123.375.459-30');
+INSERT INTO `historico_de_calculo` VALUES (1,8.6,1,0,0,'1970-01-01','123.375.479-30'),(3,8.6,1,0,0,'1970-01-01','123.375.459-30');
 /*!40000 ALTER TABLE `historico_de_calculo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `premiacao`
+--
+
+DROP TABLE IF EXISTS `premiacao`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `premiacao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idhistorico_de_calculo` int(11) NOT NULL,
+  `idproduto` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idhistorico_de_calculo` (`idhistorico_de_calculo`),
+  KEY `idproduto` (`idproduto`),
+  CONSTRAINT `premiacao_ibfk_1` FOREIGN KEY (`idhistorico_de_calculo`) REFERENCES `historico_de_calculo` (`id`),
+  CONSTRAINT `premiacao_ibfk_2` FOREIGN KEY (`idproduto`) REFERENCES `produto` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `premiacao`
+--
+
+LOCK TABLES `premiacao` WRITE;
+/*!40000 ALTER TABLE `premiacao` DISABLE KEYS */;
+INSERT INTO `premiacao` VALUES (1,3,2),(2,1,2),(3,3,2),(4,1,2);
+/*!40000 ALTER TABLE `premiacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -101,4 +133,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-20 12:42:24
+-- Dump completed on 2019-11-20 21:08:57

@@ -26,7 +26,7 @@ class ClienteRepositoryDatabase implements ClienteRepositoryInterface
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getById(string $cpf): \Hackthon\Entity\Cliente
+    public function getById(string $cpf): Cliente
     {
         $stmt = $this->conexao->prepare("select * from cliente where cpf = ?");
         $stmt->bindValue(1, $cpf);

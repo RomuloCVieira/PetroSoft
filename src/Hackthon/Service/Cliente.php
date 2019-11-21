@@ -29,7 +29,7 @@ class Cliente
 
     public function getNome() : EntityCliente
     {
-        return $this->clienteRepository->getById('nome');
+        return $this->clienteRepository->getById('123.375.479-30');
     }
 
     public function update(EntityCliente $cliente) : EntityCliente

@@ -21,7 +21,7 @@ class AtualizaNomeController extends AtualizaClienteController
     
     protected function getSuccessMessage() : string
     {
-        return 'Nome atualizado com sucesso';
+        return 'Nome atualizado com sucesso!!!';
     }
 
 }
