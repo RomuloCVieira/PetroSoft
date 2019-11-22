@@ -13,7 +13,9 @@ use Hackthon\Controller\AtualizaPrecoEtanol;
 use Hackthon\Controller\AtualizaNomeController;
 use Hackthon\Controller\AtualizaPrecoGasolina;
 use Hackthon\Controller\CalcularGasolinaxEtanol;
+use Hackthon\Controller\ListarCombustivelPorData;
 use Hackthon\Controller\ListarListaEtanol;
+use Hackthon\Controller\ListarListaGasolina;
 use Hackthon\Controller\ListarPrecoEtanolAtual;
 use Hackthon\Controller\ListarPrecoGasolinaAtual;
 use Hackthon\Repository\ClienteRepositoryDatabase;
@@ -51,6 +53,8 @@ $controllers = [
     '9'   => ListarPrecoEtanolAtual::class,
     '10'  => CalcularGasolinaxEtanol::class,
     '11'  => ListarListaEtanol::class,
+    '12'  => ListarListaGasolina::class,
+    '13'  => ListarCombustivelPorData::class,
 ];
 $service = [
     '1'   => $serviceCliente = new Cliente($clienteRepositoryDatabase),
@@ -64,6 +68,8 @@ $service = [
     '9'   => $serviceCliente = new HistoricoDeCalculo($historicoDeCalculoRepositoryDatabase),
     '10'   => $serviceCliente = new HistoricoDeCalculo($historicoDeCalculoRepositoryDatabase),
     '11'   => $serviceCliente = new HistoricoDeCalculo($historicoDeCalculoRepositoryDatabase),
+    '12'   => $serviceCliente = new HistoricoDeCalculo($historicoDeCalculoRepositoryDatabase),
+    '13'   => $serviceCliente = new HistoricoDeCalculo($historicoDeCalculoRepositoryDatabase),
 ];
 
 $coluna = [
@@ -77,7 +83,9 @@ $coluna = [
     '8' => 'null',
     '9' => 'null',
     '10' => 'null',
-    '11' => 'preco_etanol'
+    '11' => 'preco_etanol',
+    '12' => 'preco_gasolina',
+    '13' => 'null',
 ];
 while(true){
 
@@ -87,21 +95,23 @@ while(true){
 
     $padding = $climate->padding(20);
 
-    $padding->label('Listar Clientes.............')->result('[1]');
+    $padding->label('Listar Clientes...............')->result('[1]');
     $padding->label('Listar Produtos...............')->result('[2]');
-    $padding->label('Listar Historico de Calculos')->result('[3]');
-    $padding->label('Listar Historico de Premios')->result('[4]');
-    $padding->label('Atualizar cliente............')->result('[5]');
-    $padding->label('Atualizar Preço do Etanol')->result('[6]');
-    $padding->label('Atualizar Preço do Gasolina')->result('[7]');
+    $padding->label('Listar Historico de Calculos..')->result('[3]');
+    $padding->label('Listar Historico de Premios...')->result('[4]');
+    $padding->label('Atualizar cliente.............')->result('[5]');
+    $padding->label('Atualizar Preço do Etanol.....')->result('[6]');
+    $padding->label('Atualizar Preço do Gasolina...')->result('[7]');
     $padding->label('Listar preço da Gasolina atual')->result('[8]');
-    $padding->label('Listar preço do Etanol atual')->result('[9]');
-    $padding->label('Calculadora................')->result('[10]');
-    $padding->label('Listar lista de Etanol.....')->result('[11]');
+    $padding->label('Listar preço do Etanol atual..')->result('[9]');
+    $padding->label('Calculadora...................')->result('[10]');
+    $padding->label('Listar lista de Etanol........')->result('[11]');
+    $padding->label('Listar lista de Gasolina......')->result('[12]');
+    $padding->label('Listar Gasolina e Etanol Por data......')->result('[13]');
 
 
     $input = $climate->input('Selecione opção do menu');
-    $input->accept([1,2,3,4,5,6,7,8,9,10,11]);
+    $input->accept([1,2,3,4,5,6,7,8,9,10,11,12,13]);
 
     $nameController = $input->prompt();    
     //cria obejeto Controller Dependendo do que for passado por parametro e passa o climate para criar tabela

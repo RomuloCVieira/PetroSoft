@@ -37,4 +37,8 @@ class HistoricoDeCalculo
     {
         return $this->historicoDeCalculoRepositoryInterface->getCombustivel($coluna);
     }
+    public function buscarPorDataService($data) : EntityHistoricoDeCalculo
+    {
+        return $this->historicoDeCalculoRepositoryInterface->buscarPorDataDatabase($data);
+    }
 }

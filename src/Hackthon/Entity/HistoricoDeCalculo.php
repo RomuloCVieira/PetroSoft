@@ -55,7 +55,7 @@ class HistoricoDeCalculo
     }
     public function getResultado() : float
     {
-       return $this->resultado;
+       return (float) $this->resultado;
     }
     public function getPontuacao() : int
     {
