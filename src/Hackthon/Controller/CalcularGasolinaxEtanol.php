@@ -6,13 +6,8 @@ namespace Hackthon\Controller;
 
 use Hackthon\Entity\HistoricoDeCalculo;
 
-class AtualizaPrecoGasolina extends AtualizaPreco
+class CalcularGasolinaxEtanol extends CalcularMediaController
 {
-
-    protected function getPreco() : HistoricoDeCalculo
-    {
-        return $this->serviceHistoricoDeCalculo->getPrecoService();
-    }
 
     protected function getTitle() : string
     {
@@ -21,7 +16,7 @@ class AtualizaPrecoGasolina extends AtualizaPreco
     
     protected function getSuccessMessage() : string
     {
-        return 'Calculo efetuado com sucesso';
+        return 'Calculo efetuado com sucesso!!!';
     }
     protected function getColuna() : string
     {

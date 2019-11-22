@@ -12,7 +12,8 @@ use Hackthon\Controller\ListarHistoricoDePremio;
 use Hackthon\Controller\AtualizaPrecoEtanol;
 use Hackthon\Controller\AtualizaNomeController;
 use Hackthon\Controller\AtualizaPrecoGasolina;
-use Hackthon\Controller\CalcularController;
+use Hackthon\Controller\CalcularGasolinaxEtanol;
+use Hackthon\Controller\ListarListaEtanol;
 use Hackthon\Controller\ListarPrecoEtanolAtual;
 use Hackthon\Controller\ListarPrecoGasolinaAtual;
 use Hackthon\Repository\ClienteRepositoryDatabase;
@@ -48,7 +49,8 @@ $controllers = [
     '7'   => AtualizaPrecoGasolina::class,
     '8'   => ListarPrecoGasolinaAtual::class,
     '9'   => ListarPrecoEtanolAtual::class,
-    '10'   => CalcularController::class,
+    '10'  => CalcularGasolinaxEtanol::class,
+    '11'  => ListarListaEtanol::class,
 ];
 $service = [
     '1'   => $serviceCliente = new Cliente($clienteRepositoryDatabase),
@@ -61,6 +63,7 @@ $service = [
     '8'   => $serviceCliente = new HistoricoDeCalculo($historicoDeCalculoRepositoryDatabase),
     '9'   => $serviceCliente = new HistoricoDeCalculo($historicoDeCalculoRepositoryDatabase),
     '10'   => $serviceCliente = new HistoricoDeCalculo($historicoDeCalculoRepositoryDatabase),
+    '11'   => $serviceCliente = new HistoricoDeCalculo($historicoDeCalculoRepositoryDatabase),
 ];
 
 $coluna = [
@@ -74,6 +77,7 @@ $coluna = [
     '8' => 'null',
     '9' => 'null',
     '10' => 'null',
+    '11' => 'preco_etanol'
 ];
 while(true){
 
@@ -93,10 +97,11 @@ while(true){
     $padding->label('Listar preço da Gasolina atual')->result('[8]');
     $padding->label('Listar preço do Etanol atual')->result('[9]');
     $padding->label('Calculadora................')->result('[10]');
+    $padding->label('Listar lista de Etanol.....')->result('[11]');
 
 
     $input = $climate->input('Selecione opção do menu');
-    $input->accept([1,2,3,4,5,6,7,8,9,10]);
+    $input->accept([1,2,3,4,5,6,7,8,9,10,11]);
 
     $nameController = $input->prompt();    
     //cria obejeto Controller Dependendo do que for passado por parametro e passa o climate para criar tabela

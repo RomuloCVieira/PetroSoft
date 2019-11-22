@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Hackthon\Repository;
 
+use Exception;
 use Hackthon\Entity\HistoricoDeCalculo;
 use PDO;
 
@@ -39,17 +40,24 @@ class HistoricoDeCalculoRepositoryDatabase implements HistoricoDeCalculoReposito
     }
     public function insertResultadoDatabase(HistoricoDeCalculo $historicoDeCalculo) : HistoricoDeCalculo
     {
-        $stmt = $this->conexao->prepare("INSERT INTO historico_de_calculo (resultado,pontuacao,preco_gasolina,preco_etanol,data,idcliente) 
-                                         VALUES (:resultado,:pontuacao,:preco_gasolina,:preco_etanol,:data,:idcliente)");
+        $stmt = $this->conexao->prepare("INSERT INTO historico_de_calculo (resultado,pontuacao,preco_gasolina,preco_etanol,idcliente) 
+                                         VALUES (:resultado,:pontuacao,:preco_gasolina,:preco_etanol,:idcliente)");
         $stmt->bindValue(':resultado',$historicoDeCalculo->getResultado());
         $stmt->bindValue(':pontuacao',$historicoDeCalculo->getPontuacao());
         $stmt->bindValue(':preco_gasolina',$historicoDeCalculo->getPrecoGasolina());
         $stmt->bindValue(':preco_etanol',$historicoDeCalculo->getPrecoEtanol());
-        $stmt->bindValue(':data',$historicoDeCalculo->getData());
         $stmt->bindValue(':idcliente',$historicoDeCalculo->getIdCliente());
-        $stmt->execute();
+        if(!$stmt->execute()){
+            throw new Exception(print_r($stmt->errorInfo()));
+        }
 
         return $historicoDeCalculo;
+    }
+    public function getCombustivel(string $coluna) :  array
+    {
+        $stmt = $this->conexao->prepare("select $coluna from historico_de_calculo");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }

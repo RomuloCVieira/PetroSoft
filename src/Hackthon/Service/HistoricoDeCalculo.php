@@ -33,4 +33,8 @@ class HistoricoDeCalculo
         return $this->historicoDeCalculoRepositoryInterface->insertResultadoDatabase($historicoDeCalculo);
                                                              
     }
+    public function getCombustivelService(string $coluna) : array
+    {
+        return $this->historicoDeCalculoRepositoryInterface->getCombustivel($coluna);
+    }
 }

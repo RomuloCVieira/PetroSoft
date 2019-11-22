@@ -29,9 +29,9 @@ class HistoricoDeCalculo
         $this->pontuacao = $pontuacao;
         return $this;
     }
-    public function setIdCliente(int $idCliente) : HistoricoDeCalculo
+    public function setIdCliente(string $idCliente) : HistoricoDeCalculo
     {
-        $this->idCliente = $idCliente;
+        $this->idcliente = $idCliente;
         return $this;
     }
     public function setPrecoGasolina(float $preco_gasolina) : HistoricoDeCalculo
@@ -61,9 +61,9 @@ class HistoricoDeCalculo
     {
         return $this->pontuacao;
     }
-    public function getIdCliente() : int 
+    public function getIdCliente() : string
     {
-        return $this->idCliente;
+        return $this->idcliente;
     }
     public function getPrecoGasolina() : float
     {

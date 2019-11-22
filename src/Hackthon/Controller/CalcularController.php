@@ -10,9 +10,9 @@ use Respect\Validation\Validator as v;
  
 class CalcularController
 {
-    private $serviceHistoricoDeCalculo;
-    private $climate;
-    private $calcular;
+    protected $serviceHistoricoDeCalculo;
+    protected $climate;
+    protected $calcular;
 
     public function __construct(HistoricoDeCalculo $serviceHistoricoDeCalculo,$climate,string $coluna)
     {
