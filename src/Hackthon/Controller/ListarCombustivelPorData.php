@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Hackthon\Controller;
 
+use Exception;
 use Hackthon\Service\HistoricoDeCalculo;
 use Hackthon\Entity\HistoricoDeCalculo as EntityHistoricoDeCalculo;
 use Respect\Validation\Validator as v;
@@ -23,44 +24,51 @@ class ListarCombustivelPorData
     //  É como se o objeto pudesse ser chamado inúmeras vezes como um método.
     public function __invoke()
     {
-        $input = $this->climate->input('Digite uma data:');
-        $input->accept(function($response) {
+        try{
+            $input = $this->climate->input('Digite uma data:');
+            $input->accept(function($response) {
+                
+                $validate = v::date('d/m/Y')  
+                                ->validate($response);
+                if (!$validate) {
+                    $this->climate->red('Formato de data Invalido!!');
+                }
+                return $validate;
+
             
-            $validate = v::date('d/m/Y')  
-                            ->validate($response);
-            if (!$validate) {
-                $this->climate->red('Formato de data Invalido!!');
-            }
-            return $validate;
-
-         
-        });
-        $data = $input->prompt();
-        $data = str_replace("/", "-", $data);
-        $data = date('Y-m-d', strtotime($data));
-        $historiocoPorData = $this->buscarPorData($data);
-        dump($historiocoPorData);
-        $this->climate->clear();
-       
-        $this->climate->flank('Busca efetuada com sucesso', '!');
+            });
+            $data = $input->prompt();
+            $data = str_replace("/", "-", $data);
+            $data = date('Y-m-d', strtotime($data));
+            $historiocoPorData = $this->buscarPorData($data);
+            dump($historiocoPorData);
+            $this->climate->clear();
         
-        $this->climate->break();
+            $this->climate->flank('Busca efetuada com sucesso', '!');
+            
+            $this->climate->break();
 
-        $padding = $this->climate->padding(20);
-        $padding->label('Gasolina')->result($historiocoPorData->getPrecoGasolina());
-        $padding->label('Etanol')->result($historiocoPorData->getPrecoEtanol());
-        $padding->label('Resultado')->result($historiocoPorData->getResultado());
+            $padding = $this->climate->padding(20);
+            $padding->label('Gasolina')->result($historiocoPorData->getPrecoGasolina());
+            $padding->label('Etanol')->result($historiocoPorData->getPrecoEtanol());
+            $padding->label('Resultado')->result($historiocoPorData->getResultado());
 
-        $this->climate->break();
+            $this->climate->break();
 
-        if($historiocoPorData->getResultado() >= 0.7){
-            $this->climate->green("Abasteça com Gasolina!!!");
-        }else{
-            $this->climate->green("Abasteça com Etanol!!!");
+            if($historiocoPorData->getResultado() >= 0.7){
+                $this->climate->green("Abasteça com Gasolina!!!");
+            }else{
+                $this->climate->green("Abasteça com Etanol!!!");
+            }
+
+            $this->climate->break();
+        }catch(Exception $e){
+            $this->climate->break();
+            $this->climate->red($e->getMessage());
+            $this->climate->break();
+            $this->climate->break();
+
         }
-
-        $this->climate->break();
-
     }
     protected function buscarPorData($data) : EntityHistoricoDeCalculo
     {

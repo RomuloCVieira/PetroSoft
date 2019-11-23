@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Hackthon\Service;
 
+use Exception;
 use Hackthon\Repository\HistoricoDeCalculoRepositoryInterface;
 use Hackthon\Entity\HistoricoDeCalculo as EntityHistoricoDeCalculo;
 
@@ -39,6 +40,9 @@ class HistoricoDeCalculo
     }
     public function buscarPorDataService($data) : EntityHistoricoDeCalculo
     {
+        if( $this->historicoDeCalculoRepositoryInterface->buscarPorDataDatabase($data) == null ){
+            throw new Exception('Data não encontrada!!!');
+        }
         return $this->historicoDeCalculoRepositoryInterface->buscarPorDataDatabase($data);
     }
 }
