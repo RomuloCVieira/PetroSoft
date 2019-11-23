@@ -55,13 +55,15 @@ class HistoricoDeCalculoRepositoryDatabase implements HistoricoDeCalculoReposito
     }
     public function getCombustivel(string $coluna) :  array
     {
-        $stmt = $this->conexao->prepare("select $coluna from historico_de_calculo");
+        $stmt = $this->conexao->prepare("SELECT $coluna, data 
+                                            FROM historico_de_calculo 
+                                        ");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function buscarPorDataDatabase($data) : ?HistoricoDeCalculo
     {
-        $stmt = $this->conexao->prepare("SELECT *,DATE_FORMAT(data, '%d/%m/%Y') as date FROM historico_de_calculo WHERE DATE_FORMAT(data, '%Y-%m-%d') = :data ORDER BY RAND() LIMIT 1 ");
+        $stmt = $this->conexao->prepare("SELECT *,DATE_FORMAT(data, '%d/%m/%Y') as date FROM historico_de_calculo WHERE DATE_FORMAT(data, '%Y-%m-%d') = :data ORDER BY data desc LIMIT 1 ");
         $stmt->bindValue(':data',"$data");
         $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, HistoricoDeCalculo::class);
         $stmt->execute();
