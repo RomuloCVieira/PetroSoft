@@ -1,6 +1,6 @@
 {
     "host":"localhost",
-    "database":"prova1",
+    "database":"hackthon",
     "user":"root",
     "pass":""
 }
