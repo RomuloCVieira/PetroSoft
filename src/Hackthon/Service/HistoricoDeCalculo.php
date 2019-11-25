@@ -23,7 +23,7 @@ class HistoricoDeCalculo
     }
     public function getPrecoService() : EntityHistoricoDeCalculo
     {
-        return $this->historicoDeCalculoRepositoryInterface->getById(1);
+        return $this->historicoDeCalculoRepositoryInterface->getPrecoAtualDatabase();
     }
     public function updatePrecoEtanolSevice(EntityHistoricoDeCalculo $historicoDeCalculo,string $coluna) : EntityHistoricoDeCalculo
     {

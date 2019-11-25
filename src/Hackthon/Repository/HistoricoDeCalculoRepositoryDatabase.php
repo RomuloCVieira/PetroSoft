@@ -22,10 +22,9 @@ class HistoricoDeCalculoRepositoryDatabase implements HistoricoDeCalculoReposito
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getById(int $idHitoricoDeCalculo): \Hackthon\Entity\HistoricoDeCalculo
+    public function getPrecoAtualDatabase(): \Hackthon\Entity\HistoricoDeCalculo
     {
-        $stmt = $this->conexao->prepare("select * from historico_de_calculo where id = ?");
-        $stmt->bindValue(1, $idHitoricoDeCalculo);
+        $stmt = $this->conexao->prepare("select * from historico_de_calculo ORDER BY data DESC LIMIT 1");
         $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, HistoricoDeCalculo::class);
         $stmt->execute();
         return $stmt->fetch();
@@ -40,23 +39,36 @@ class HistoricoDeCalculoRepositoryDatabase implements HistoricoDeCalculoReposito
     }
     public function insertResultadoDatabase(HistoricoDeCalculo $historicoDeCalculo) : HistoricoDeCalculo
     {
-        $stmt = $this->conexao->prepare("INSERT INTO historico_de_calculo (resultado,pontuacao,preco_gasolina,preco_etanol,idcliente) 
-                                         VALUES (:resultado,:pontuacao,:preco_gasolina,:preco_etanol,:idcliente)");
+        $stmt = $this->conexao->prepare("   INSERT INTO historico_de_calculo(
+                                                resultado,
+                                                pontuacao,
+                                                preco_gasolina,
+                                                preco_etanol,
+                                                idcliente
+                                            )
+                                            VALUES(
+                                                :resultado,
+                                                :pontuacao,
+                                                :preco_gasolina,
+                                                :preco_etanol,
+                                                :idcliente
+                                            )"
+                                        );
         $stmt->bindValue(':resultado',$historicoDeCalculo->getResultado());
         $stmt->bindValue(':pontuacao',$historicoDeCalculo->getPontuacao());
         $stmt->bindValue(':preco_gasolina',$historicoDeCalculo->getPrecoGasolina());
         $stmt->bindValue(':preco_etanol',$historicoDeCalculo->getPrecoEtanol());
         $stmt->bindValue(':idcliente',$historicoDeCalculo->getIdCliente());
-        if(!$stmt->execute()){
-            throw new Exception(print_r($stmt->errorInfo()));
-        }
-
+        $stmt->execute();
         return $historicoDeCalculo;
     }
     public function getCombustivel(string $coluna) :  array
     {
-        $stmt = $this->conexao->prepare("SELECT $coluna, data 
-                                            FROM historico_de_calculo 
+        $stmt = $this->conexao->prepare("SELECT
+                                            $coluna,
+                                            DATE_FORMAT(DATA, '%d/%m/%Y %H:%m:%s') as data_hora
+                                        FROM
+                                            historico_de_calculo
                                         ");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

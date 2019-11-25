@@ -7,7 +7,7 @@ namespace Hackthon\Controller;
 use Hackthon\Entity\HistoricoDeCalculo;
 use Respect\Validation\Validator as v;
 
-abstract class AtualizaPreco extends ControllerHistoricoDeCalculo
+abstract class AtualizaPreco extends AtualizaHistoricoDeCalculoController
 {
     private $title;
 

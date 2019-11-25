@@ -6,7 +6,7 @@ namespace Hackthon\Controller;
 
 use Hackthon\Service\HistoricoDeCalculo;
 
-class ControllerHistoricoDeCalculo
+class AtualizaHistoricoDeCalculoController
 {
     protected $serviceHistoricoDeCalculo;
     protected $climate;

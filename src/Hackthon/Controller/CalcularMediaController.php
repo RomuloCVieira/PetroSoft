@@ -51,7 +51,7 @@ abstract class CalcularMediaController extends CalcularController
 
         $padding = $this->climate->padding(20);
         $padding->label($this->resultado[2])->result($this->resultado[1]);
-       
+        
         $this->climate->green($this->getSuccessMessage());
 
     }
